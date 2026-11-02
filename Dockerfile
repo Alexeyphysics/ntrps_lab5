@@ -1,9 +1,9 @@
-# Базовый образ Python 3.10 Slim
-FROM python:3.10-slim
+# Базовый стабильный образ Python 3.10 Slim (Debian Bookworm)
+FROM python:3.10-slim-bookworm
 
-# Установка системных зависимостей для работы Qt/OpenGL в Linux
+# Установка системных библиотек для работы Qt и OpenGL
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libgl1-mesa-glx \
+    libgl1 \
     libglib2.0-0 \
     libxkbcommon-x11-0 \
     libfontconfig1 \
@@ -16,8 +16,8 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Копирование исходного кода приложения
+# Копирование файлов проекта
 COPY . .
 
-# Команда по умолчанию: прогон автотестов
+# Команда по умолчанию: прогон 10 модульных тестов
 CMD ["pytest", "-v"]
