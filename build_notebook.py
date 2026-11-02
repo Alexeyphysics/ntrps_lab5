@@ -15,14 +15,7 @@ def create_lab5_notebook() -> None:
                 "\n",
                 "**Дисциплина:** Новые технологии в РПС  \n",
                 "**Вариант:** №9 (Текстовые отзывы с сервиса *Otzovik*, классы 1–5 звёзд)  \n",
-                "**Выполнил:** студент Кондратенко А.С. (гр. M_PIN_RIS_2607)  \n",
-                "\n",
-                "--- \n",
-                "## Цель работы\n",
-                "Комплексная интеграция модулей веб-скрейпинга (ЛР1), реорганизации датасета (ЛР2), "
-                "графического интерфейса (ЛР3) и исследовательского анализа данных (ЛР4). "
-                "Реализация набора unit-тестов с проверкой позитивных, негативных и граничных сценариев, "
-                "подготовка скриптов развертывания (run.bat, run.sh, Dockerfile) и технической документации."
+                "**Выполнил:** студент Кондратенко А.С. (гр. M_PIN_RIS_2607)"
             ]
         },
         {
@@ -43,25 +36,22 @@ def create_lab5_notebook() -> None:
                 "import subprocess\n",
                 "from pathlib import Path\n",
                 "\n",
-                "# Автоматическая установка необходимых пакетов в Google Colab\n",
+                "# Установка необходимых пакетов в Colab\n",
                 "for pkg in ['pymorphy3', 'pytest', 'pytest-cov']:\n",
                 "    try:\n",
                 "        __import__(pkg)\n",
                 "    except ImportError:\n",
                 "        subprocess.check_call([sys.executable, '-m', 'pip', 'install', '-q', pkg])\n",
                 "\n",
-                "# Клонирование репозитория в среду Colab\n",
-                "if not Path('dataset').exists():\n",
-                "    print('Клонирование репозитория ntrps_lab5 в Google Colab...')\n",
+                "# Полная загрузка всех файлов из репозитория GitHub\n",
+                "if not Path('tests/test_app.py').exists():\n",
+                "    print('Клонирование репозитория ntrps_lab5...')\n",
+                "    os.system('rm -rf _tmp_repo')\n",
                 "    os.system('git clone https://github.com/Alexeyphysics/ntrps_lab5.git _tmp_repo')\n",
-                "    if Path('_tmp_repo/dataset').exists():\n",
-                "        os.system('cp -r _tmp_repo/dataset ./dataset')\n",
-                "        os.system('cp -r _tmp_repo/tests ./tests')\n",
-                "        os.system('cp _tmp_repo/*.py ./')\n",
-                "        os.system('cp _tmp_repo/pytest.ini ./')\n",
+                "    os.system('cp -r _tmp_repo/* ./')\n",
                 "    os.system('rm -rf _tmp_repo')\n",
                 "\n",
-                "print('Среда готова, файлы и датасет успешно загружены!')"
+                "print('Все файлы проекта и автотесты готовы!')"
             ]
         },
         {
@@ -79,7 +69,6 @@ def create_lab5_notebook() -> None:
             "metadata": {},
             "outputs": [],
             "source": [
-                "# Запуск pytest с выводом детального отчета о прохождении\n",
                 "!python3 -m pytest -v tests/test_app.py"
             ]
         },
@@ -153,11 +142,7 @@ def create_lab5_notebook() -> None:
             "metadata": {},
             "source": [
                 "--- \n",
-                "## 4. Архитектура деплоя и развертывания (Пункт 3 и 5 задания)\n",
-                "Приложение готово к запуску в различных средах:\n",
-                "- **Windows:** запуск в один клик через `run.bat` (автосоздание venv и установка зависимостей);\n",
-                "- **Linux:** bash-скрипт `run.sh`;\n",
-                "- **Docker:** контейнер на базе `python:3.10-slim` с предустановленными библиотеками Qt и OpenGL."
+                "## 4. Архитектура деплоя и развертывания (Пункт 3 и 5 задания)"
             ]
         },
         {
@@ -166,9 +151,8 @@ def create_lab5_notebook() -> None:
             "metadata": {},
             "outputs": [],
             "source": [
-                "# Демонстрация содержимого файла развертывания run.bat\n",
                 "if Path('run.bat').exists():\n",
-                "    print('=== СОДЕРЖИМОЕ RUN.BAT ===')\n",
+                "    print('=== СОДЕРЖИМОЕ RUN.BAT (WINDOWS) ===')\n",
                 "    print(Path('run.bat').read_text(encoding='utf-8'))"
             ]
         }
@@ -193,7 +177,7 @@ def create_lab5_notebook() -> None:
     with open("lab5_notebook.ipynb", "w", encoding="utf-8") as f_out:
         json.dump(notebook_data, f_out, ensure_ascii=False, indent=1)
 
-    print("Ноутбук lab5_notebook.ipynb успешно создан и проверен AST-валидатором!")
+    print("Ноутбук lab5_notebook.ipynb обновлен!")
 
 
 if __name__ == "__main__":
