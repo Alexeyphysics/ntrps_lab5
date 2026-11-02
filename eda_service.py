@@ -136,9 +136,12 @@ def get_top_lemmas_by_class(
     if subset.empty:
         return {}
 
-    custom_stops = _STOP_WORDS.union(
-        {"это", "свой", "который", "весь", "мочь", "год"}
-    )
+    custom_stops = _STOP_WORDS.union({
+        "это", "свой", "который", "весь", "мочь", "год",
+        "достоинство", "недостаток", "сбербанк", "банк",
+        "сбер", "отзыв", "очень", "просто", "также", "день",
+        "карта", "деньга", "работа"
+    })
     lemmas: List[str] = []
 
     for text in subset["text"]:
