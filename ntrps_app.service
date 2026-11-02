@@ -1,0 +1,15 @@
+[Unit]
+Description=Сервис аналитической системы отзывов (ЛР5 Кондратенко А.С.)
+After=network.target
+
+[Service]
+Type=simple
+User=recondr
+WorkingDirectory=/home/recondr/projects/ntrps_lab5
+ExecStart=/home/recondr/projects/ntrps_lab5/venv/bin/python main.py
+Restart=on-failure
+RestartSec=5s
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
