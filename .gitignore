@@ -11,3 +11,4 @@ dataset_class/
 dataset_random/
 build/
 dist/
+venv_win/

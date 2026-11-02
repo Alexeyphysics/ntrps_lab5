@@ -1,20 +1,21 @@
 @echo off
 chcp 65001 > nul
 echo ====================================================
-echo Запуск приложения: Аналитическая система отзывов
-echo Разработчик: Кондратенко А.С. (гр. M_PIN_RIS_2607)
+echo Zapusk prilozheniya: Analiticheskaya sistema otzyvov
+echo Razrabotchik: Kondratenko A.S. (gr. M_PIN_RIS_2607)
 echo ====================================================
 
-if not exist venv (
-    echo Создание виртуального окружения...
-    python -m venv venv
-    call venv\Scripts\activate.bat
-    echo Установка зависимостей...
-    pip install -r requirements.txt
+if not exist venv_win\Scripts\activate.bat (
+    echo [INFO] Sozdanie virtualnogo okruzheniya dlya Windows...
+    python -m venv venv_win
+    call venv_win\Scripts\activate.bat
+    echo [INFO] Ustanovka bibliotek v Windows (PySide6, pandas, etc)...
+    python -m pip install --upgrade pip
+    pip install PySide6 pandas matplotlib seaborn nltk pymorphy3 requests beautifulsoup4
 ) else (
-    call venv\Scripts\activate.bat
+    call venv_win\Scripts\activate.bat
 )
 
-echo Запуск графического интерфейса...
+echo [INFO] Zapusk graficheskogo interfeysa...
 python main.py
 pause
